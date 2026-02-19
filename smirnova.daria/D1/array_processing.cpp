@@ -64,3 +64,11 @@ std::pair<char *, std::size_t> smirnova::buildSequence(int &error_code)
 
   return {seq, size};
 }
+
+void smirnova::printReverse(const char *seq, std::size_t size)
+{
+  for (std::size_t i = size; i > 0; --i) {
+    std::cout << seq[i - 1];
+  }
+  std::cout << '\n';
+}
