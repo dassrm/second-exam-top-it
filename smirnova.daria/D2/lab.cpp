@@ -40,7 +40,36 @@ void readInput(CharTable & table)
   }
 }
 
-} // namespace
+void printForward(const CharTable & table)
+{
+  for (int i = 0; i < table.orderSize; ++i) {
+    const int idx = static_cast<unsigned char>(table.order[i]);
+    std::cout << table.counts[idx] << ' ' << table.order[i] << '\n';
+  }
+}
+
+void printReverse(const CharTable & table)
+{
+  for (int i = table.orderSize - 1; i >= 0; --i) {
+    const int idx = static_cast<unsigned char>(table.order[i]);
+    std::cout << table.counts[idx] << ' ' << table.order[i] << '\n';
+  }
+}
+
+void printTable(const CharTable & table, bool reverse)
+{
+  if (table.orderSize == 0) {
+    std::cout << '\n';
+    return;
+  }
+  if (reverse) {
+    printReverse(table);
+  } else {
+    printForward(table);
+  }
+}
+
+}
 
 bool parseArgs(int argc, char const * const * argv, ParseResult & result)
 {
@@ -60,7 +89,7 @@ void processInput(bool reverse)
   CharTable table;
   initTable(table);
   readInput(table);
-  (void)reverse;
+  printTable(table, reverse);
 }
 
 }
